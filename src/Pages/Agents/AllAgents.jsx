@@ -53,7 +53,7 @@ export const AllAgents = () => {
   }
 
   return (
-    <div className="flex flex-col gap-5 p-3 md:grid md:grid-cols-3 md:place-content-center md:place-items-center">
+    <div className="flex flex-col items-center gap-5 p-3 md:grid md:grid-cols-3 md:place-content-center md:place-items-center">
       {agents.map((agent) => (
         <ImgAgentCard
           key={agent.uuid}
