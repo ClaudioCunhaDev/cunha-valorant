@@ -11,7 +11,6 @@ export const IndividualAgent = () => {
   const getIndividualAgent = async () => {
     const response = await fetch(url);
     const body = await response.json();
-    console.log(body.data);
     setAgent({
       displayName: body.data.displayName,
       image: body.data.displayIcon,
@@ -54,13 +53,17 @@ export const IndividualAgent = () => {
             abilities:
           </h5>
           <div className="md:grid md:grid-cols-3 md:gap-3 p-3">
-            {agent?.abilities?.map((ele) => (
-              <div className="" key={ele.displayName}>
+            {agent?.abilities?.map((ele, i) => (
+              <div className="ml-5" key={ele.displayName}>
                 <p className="text-center text-md font-bold tracking-tight text-gray-900 dark:text-white">
                   {ele.displayName}
                 </p>
-                <div className="w-full flex justify-center">
-                  <img className="bg-slate-900" src={ele.displayIcon} alt="" />
+                <div className="w-full flex justify-center bg-slate-300">
+                  <img
+                    className="bg-slate-900 h-40 p-1"
+                    src={ele.displayIcon}
+                    alt=""
+                  />
                 </div>
                 {!res ? (
                   <p className="text-sm font-bold tracking-tight text-gray-600 dark:text-white">

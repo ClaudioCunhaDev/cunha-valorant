@@ -16,7 +16,7 @@ const router = createBrowserRouter([
         element: <AllAgents />,
       },
       {
-        index: "agents",
+        path: "agents",
         element: <AllAgents />,
       },
       {

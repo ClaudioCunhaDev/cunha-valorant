@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
 import ImgAgentCard from "../../Components/ImgAgentCard";
+import { Pagination } from "../../Components/Pagination";
 
 export const AllAgents = () => {
   const url = "https://valorant-api.com/v1/agents";
   const [loading, setLoading] = useState(true);
   const [agents, setAgents] = useState([]);
+  const [currentPage, setCurrenPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(3);
+  const lastIndex = currentPage * postsPerPage;
+  const firstIndex = lastIndex - postsPerPage;
+  const currentAgents = agents.slice(firstIndex, lastIndex);
 
   const getAgents = async () => {
     try {
@@ -53,16 +59,26 @@ export const AllAgents = () => {
   }
 
   return (
-    <div className="flex flex-col items-center gap-5 p-3 md:grid md:grid-cols-3 md:place-content-center md:place-items-center">
-      {agents.map((agent) => (
-        <ImgAgentCard
-          key={agent.uuid}
-          description={agent.description}
-          displayIcon={agent.displayIcon}
-          displayName={agent.displayName}
-          agentId={agent.uuid}
+    <div>
+      <div className=" flex justify-center">
+        <Pagination
+          totalPosts={agents.length}
+          postsPerPage={postsPerPage}
+          setCurrentPage={setCurrenPage}
+          currentPage={currentPage}
         />
-      ))}
+      </div>
+      <div className="flex flex-col items-center gap-5 p-3 md:grid md:grid-cols-3 md:place-content-center md:place-items-center">
+        {currentAgents.map((agent) => (
+          <ImgAgentCard
+            key={agent.uuid}
+            description={agent.description}
+            displayIcon={agent.displayIcon}
+            displayName={agent.displayName}
+            agentId={agent.uuid}
+          />
+        ))}
+      </div>
     </div>
   );
 };

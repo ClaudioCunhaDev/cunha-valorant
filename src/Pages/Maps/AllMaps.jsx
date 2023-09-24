@@ -10,7 +10,6 @@ export const AllMaps = () => {
     try {
       const response = await fetch(url);
       const body = await response.json();
-      console.log(body);
       const mapsWithDescription = body.data.filter(
         (map) => map.narrativeDescription
       );
